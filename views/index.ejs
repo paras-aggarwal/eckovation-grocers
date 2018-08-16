@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GROCERS </title>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <a href="users/logout">logout</a>
+    <a href="users/login">login</a>
+     
+  
+<nav class="navbar navbar-inverse navbar-fixed-top navbar-expand-lg navbar-dark">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span> 
+      </button>
+      <a class="navbar-brand" href="/">GROCERS</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <% if(!user)
+        {%>
+        <li><a href="/users/phone"></span>Add Bid</a></li>
+        <li><a href="/users/phone"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li><a href="/users/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          
+          <%} %>
+          <% if(user)
+        {%>
+          <li><a href="/cart/showcart"></span>cart</a></li>
+        
+        <li><a href="/item/additem"></span>Add Bid</a></li>
+        <li><a href="/users/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        <!-- <li><a href="/cart/addcart"><span class="glyphicon glyphicon-log-out"></span> Cart</a></li>-->
+        <li><form action="cart/showcart" method="post">
+          <input type="text" name="user" hidden="hidden" value=<%=user.cartid%>>
+          <input type="submit" name="cart" value="cart">
+        </form></li>
+          <%} %>
+          
+      </ul>
+    </div>
+  </div>
+</nav>
+ 
+  
+   
+   <% for(var i=item.length-1; i>=0; i--) {%>
+           <div class="card" style="width: 18rem;float: left;padding: 5px;margin: 5px" >
+            <img class="card-img-top" src="#" alt="Card image cap"><hr>
+            <div class="card-body">
+              <h5 class="card-title"><%= item[i].name %></h5>
+              <h6 class="card-subtitle mb-2 text-muted">Rs. <%= item[i].price %> /kg</h6>
+              <p><%= item[i].quality %></p>
+              <p class="card-text"><%= item[i].description %></p>
+              
+              <form action="/cart/additem/" method="post">
+                <input type="text" name="item" hidden="hidden" value=<%=item[i].name%>>
+                    
+                    <% if(user)
+                    {%>
+                    <input type="text" name="user" hidden="hidden" value=<%=user.cartid%>>
+                   <%} %>
+                   <input type="number" name="price" hidden="hidden" value=<%=item[i].price%>>
+                <input type="number" name="quantity" min=1 value=1 id='quantity' style="float: left;width: 40px">
+                <button class="btn btn-primary" style="margin-left: 10px">Add To Cart</button>
+              </form>
+            </div>
+          </div>
+         
+
+         <% } %>
+
+
+</body>

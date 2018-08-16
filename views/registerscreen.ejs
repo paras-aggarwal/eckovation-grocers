@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BID-4-U || Now Do Bidding Easily</title>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <link rel="stylesheet" href="/style.css">
+
+   <style>
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: #3b3460;
+   color: white;
+   text-align: center;
+}
+</style>
+
+</head>
+
+<body style="background-color: #f3f3f3">
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    
+<!-- Sign up -->
+ <div class="container">    
+                 <% if (error)
+                      {%>
+                     <% for (var i=0;i<error.length;i++)
+                       {%>
+                   <div class="alert alert-danger"><%= error_msg %></div>
+                        <%}
+                      %>
+                        <%} %>
+        <div class="panel-body" >
+                            <form id="signupform" class="form-horizontal" role="form" action="/users/register" action="/cart/addcart" accept-charset="UTF-8" method="POST">
+                                <div id="signupalert" style="display:none" class="alert alert-danger">
+                                    <p>Error:</p>
+                                    <span></span>
+                                </div><!-- 
+                                <div class="form-group"> -->
+                                <div style="margin-bottom: 25px" class="input-group">
+<!--                                     <label for="name" class="col-md-3 control-label">Full Name</label> -->
+                                    <!-- <div class="col-md-9"> -->
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user text-primary"></i></span>
+                                        <input type="text" class="form-control" name="name" placeholder="Full Name" autofocus="autofocus" required="true" >
+                                    <!-- </div> -->
+                                </div><!--
+                                 <div class="form-group">
+                                    <label for="email" class="col-md-3 control-label">Email</label>
+                                    <div class="col-md-9"> -->
+                                   <div style="margin-bottom: 25px" class="input-group">
+                                      <span class="input-group-addon"><i class="glyphicon glyphicon-envelope text-primary"></i></span>
+                                      <input type="email" class="form-control" id="exampleInputEmai1" aria-describedby="emailHelp" placeholder="Enter Email Address" name="email" required="true">
+                                      <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                                  <!--   </div> -->
+                                  </div>
+                                   <div style="margin-bottom: 25px" class="input-group">
+                                      <span class="input-group-addon"><i class="glyphicon glyphicon-envelope text-primary"></i></span>
+                                      <input type="number" value="<%= detail.phone%>"  class="form-control" id="exampleInputPhone" aria-describedby="phoneHelp" placeholder="Enter Contact Number" name="phone" required="true">
+                                      <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                                  <!--   </div> -->
+                                  </div>
+
+                                  </div>
+                                   <div style="margin-bottom: 25px" class="input-group">
+                                      <span class="input-group-addon"><i class="glyphicon glyphicon-envelope text-primary"></i></span>
+                                      <input type="text" class="form-control" placeholder="Enter House No." name="houseno" required="true">
+                                      <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                                  <!--   </div> -->
+                                  </div>
+
+                                  </div>
+                                   <div>
+                                   <div style="margin-bottom: 25px" class="input-group">
+                                      <span class="input-group-addon"><i class="glyphicon glyphicon-envelope text-primary"></i></span>
+                                      <input type="text" class="form-control" placeholder="Enter Locality" name="locality" required="true">
+                                      <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                                  <!--   </div> -->
+                                  </div>
+
+                                  </div>
+                                   <div>
+                                   <div style="margin-bottom: 25px" class="input-group">
+                                      <span class="input-group-addon"><i class="glyphicon glyphicon-envelope text-primary"></i></span>
+                                      <select name="city">
+                                        <option value="Rohtak">Rohtak</option>
+                                        <option value="Bhiwani">Bhiwani</option>
+                                        </select> <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                                  <!--   </div> -->
+                                  </div>
+
+                                  </div>
+                                   <div>
+                                   <div style="margin-bottom: 25px" class="input-group">
+                                      <span class="input-group-addon"><i class="glyphicon glyphicon-envelope text-primary"></i></span>
+                                      <select name="state">
+                                        <option value="Haryana">Haryana</option>
+                                        </select><!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                                  <!--   </div> -->
+                                  </div>
+                                  </div>
+                               <!--  <div class="form-group">
+                                    <label for="username" class="col-md-3 control-label">User Name</label>
+                                    <div class="col-md-9"> -->
+                                   <div>
+                                <div style="margin-bottom: 25px" class="input-group">
+                                      <span class="input-group-addon"><i class="glyphicon glyphicon-usd text-primary"></i></span>       
+                                      <input type="text" class="form-control" id="exampleInputContact" aria-describedby="ContactHelp" placeholder="Choose UserName" name="username" required="true">
+                                      <!-- <small id="emailHelp" class="form-text text-muted">Choose Your Username which u can remember :-)</small> -->
+                                  <!--   </div> -->                               
+                                </div>
+                                  </div>
+                                <!-- 
+                                <div class="form-group">
+                                    <label for="password" class="col-md-3 control-label">Password</label>
+                                    <div class="col-md-9"> -->
+                                     <div>
+                                     <div style="margin-bottom: 25px" class="input-group">
+                                       <span class="input-group-addon"><i class="glyphicon glyphicon-lock text-primary"></i></span>
+                                        <input type="password" class="form-control" id="password" placeholder="Password" name="password" required="true">
+                                        <!-- <small id="emailHelp" class="form-text text-muted">Suggestion :  Password can be AlphaNumeric</small> -->
+                                    <!-- </div> -->
+                                </div>
+                                   </div>
+                                <!-- 
+                                <div class="form-group">
+                                    <label for="icode" class="col-md-3 control-label">Confirm Password</label>
+                                    <div class="col-md-9"> -->
+                                     <div>
+                                     <div style="margin-bottom: 25px" class="input-group">
+                                       <span class="input-group-addon"><i class="glyphicon glyphicon-lock text-primary"></i></span>
+                                        <input type="password" class="form-control" id="confirm_password" placeholder="Confirm Password" name="password2" required="true">
+                                   <!--  </div> -->
+                                </div>
+                                  </div>
+                                 <span id='message'></span>
+                                  <script>
+                                  
+                                   $(document).ready(function() {
+                                  $('#password, #confirm_password').on('keyup', function () {
+                                     if($('#confirm_password').val()!="")
+                                     {
+                                     if ($('#password').val() == $('#confirm_password').val()) {
+                                         $('#message').html('Password Match').css('color', 'green');
+                                            } else 
+                                        $('#message').html('Password Not Match').css('color', 'red');
+                                            }    
+
+                                                });
+                                                     });
+
+                                              </script>
+                                <div class="form-group">
+                                    <!-- Button -->                                        
+                                    <div class="col-md-offset-3 col-md-9">
+                                        <a href="/cart/addcart">
+                                          click me
+                                        </a> 
+                                         <br>
+                                          <button class="btn btn-info" type="submit" name="commit" id="submit_button"><i class="icon-hand-right"></i> &nbsp Sign Up</button> 
+                                    </div>
+                                </div>
+                            </form>
+                         
+                         </div>
+                    </div>
+         
+    
+<script src="https://use.fontawesome.com/bc4369196c.js"></script>
+</body>
+</html>

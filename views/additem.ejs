@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BID-4-U || Now Do Bidding Easily</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <link rel="stylesheet" href="/style.css">
+
+
+    <style>
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: #3b3460;
+   color: white;
+   text-align: center;
+}
+</style>
+  
+  
+    
+
+</head>
+
+<body style="background-color: #f3f3f3">
+
+ 
+  
+            <form action="/item/additem" enctype="multipart/form-data" accept-charset="UTF-8" method="POST">
+              <div class="form-group">
+              <label>Item name</label>
+              <div class="form-row">    
+                <div class="col">
+                  <input type="text" class="form-control" placeholder="Item Name" name="itemname" autofocus="autofocus" required="true" >
+                </div>
+              </div>
+              <br/>
+              <div class="form-group">
+                <label for="exampleInputContact">Price</label>
+                <input type="number" class="form-control" id="exampleInputContact" aria-describedby="ContactHelp" placeholder="Price of ur item" name="price" required="true">
+              </div>
+             <div class="form-group">
+                <label for="exampleInputEmai1">Description Of Item</label>
+                <textarea type="text" class="form-control" id="exampleInputEmai1" aria-describedby="emailHelp" placeholder="enter smthing which describe ur item" name="description" required="true"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Quality</label>
+                <input type="text" class="form-control" placeholder="Bid End Time" name="quality" required="true">
+              </div>
+               
+               <div class="form-group">
+                <label for="exampleInputPassword1">Stock</label>
+                <input type="number" class="form-control" placeholder="Bid End Time" name="stock" required="true">
+              </div>
+                <input type="file" name="myimage" required="true"/>
+                  <input type="hidden"  name="photo" >
+                   
+                 
+             <center><input type="submit"></center>
+            </form>
+  
+
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://use.fontawesome.com/bc4369196c.js"></script>
+</body>
+</html>
