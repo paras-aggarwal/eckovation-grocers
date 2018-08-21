@@ -1,8 +1,56 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 13px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding:0;
+  background: url(https://images.pexels.com/photos/1020320/pexels-photo-1020320.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
+  background-size: cover;
+  background-repeat: none;
 }
 
 a {
   color: #00B7FF;
+}
+.navbar-brand{
+  font-family:'Metamorphous',cursive;
+  font-size: 20px;
+  padding-top:10px;
+}
+.btn{
+  margin-right: 5px;
+  font-size: 13px;
+}
+.navbar{
+  margin-bottom:0;
+}
+.card-shadow{
+  margin: 10px;
+}
+.card{
+  width: 30rem;
+  height: 25rem;
+}
+.card-shadow:hover{
+  box-shadow: 3px 3px 3px 3px #ADABAB;
+}
+.card-title{
+  font-size: 25px;
+  height: 40px;
+  line-height: 2;
+}
+.card-subtitle{
+  font-size: 18px;
+  /* line-height: 3; */
+}
+#item-quality{
+  font-size: 15px;
+  line-height: 2;
+}
+#item-description{
+  font-size: 20px;
+  line-height:1;
+}
+#item-quantity{
+  margin-top: 20px;
+  line-height: 2;
 }

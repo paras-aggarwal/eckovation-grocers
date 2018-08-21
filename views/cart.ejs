@@ -1,67 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="myapp">
 <head>
   <title>GROCERS </title>
-<meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <% include ./header %>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Metamorphous" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
 </head>
-<body>
-    <a href="users/logout">logout</a>
-    <a href="users/login">login</a>
-     
+<body ng-controller="myctrl">
   
-<nav class="navbar navbar-inverse navbar-fixed-top navbar-expand-lg navbar-dark">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span> 
-      </button>
-      <a class="navbar-brand" href="/">GROCERS</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav navbar-right">
-        <% if(!user)
-        {%>
-        <li><a href="/users/phone"></span>Add Bid</a></li>
-        <li><a href="/users/phone"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-        <li><a href="/users/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-          
-          <%} %>
-          <% if(user)
-        {%>
-        <li><a href="/item/additem"></span>Add Bid</a></li>
-        <li><a href="/gateway/pay"></span>checkout</a></li>
-        <li><a href="/users/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-        <!-- <li><a href="/cart/addcart"><span class="glyphicon glyphicon-log-out"></span> Cart</a></li>-->
-        <li><form action="cart/showcart" method="post">
-          <input type="text" name="user" hidden="hidden" value=<%=user.cartid%>>
-          <input type="submit" name="cart" value="cart">
-        </form></li>
-          <%} %>
-          
-      </ul>
-    </div>
-  </div>
-</nav>
- 
-  <h2>user's Cart</h2>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">GROCERS</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+            <% if(!user)
+            {%>
+            <li class="nav-item"><a href="/users/phone"><button class="btn btn-outline-light">+ Add Item</button></a></li>
+            <li class="nav-item"><a href="/users/register"><button class="btn btn-outline-secondary"><span class="glyphicon glyphicon-user"></span> Sign Up</button></a></li>
+            <li class="nav-item"><a href="/users/login"><button class="btn btn-outline-secondary"><span class="glyphicon glyphicon-log-in"></span> Login</button></a></li>
+              
+              <%} %>
+              <% if(user)
+              {%>
+              <li class="nav-item"><a href="/item/additem"><button class="btn btn-outline-secondary">+ Add Item</button></a></li>
+              <li class="nav-item"><a href="/users/logout"><button class="btn btn-outline-secondary"><span class="glyphicon glyphicon-log-out"></span> Logout</button></a></li>
+              <li><form class="form-inline" action="cart/showcart" method="post">
+                <input type="text" name="user" hidden="hidden" value=<%=user.cartid%>>
+                <button class="btn btn-outline-secondary" type="submit" name="cart"><span class="glyphicon glyphicon-shopping-cart"></span> cart</button>
+              </form></li>
+                <%} %>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+ <div class="row">
+   <div class="col-md-6 mx-auto">
+      <h2>User's Cart</h2>
   <div>
   	<ul>
   		<li><h4>Total price: <%=cart.price%></h4></li>
   		<li><h4>Total No. of Items: <%=cart.noofitem%> kg</h4></li>
   	</ul>
   </div>
+  <a class="nav-link checkout-button" href="/cart/checkout" data-toggle="modal" data-target="#cartcheckModal"><button class="btn btn-warning"><span class="glyphicon glyphicon-log-out"></span> Checkout</a></button>
+
   <div>
   	<% for(var i=cart.products.length-1; i>=0; i--) {%>
   		
   		<div class="card" style="width: 18rem;float: left;padding: 5px;margin: 5px" >
-            <img class="card-img-top" src="#" alt="Card image cap"><hr>
             <div class="card-body">
               <h5 class="card-title"><%= cart.products[i].itemid.name %></h5>
               <h6 class="card-subtitle mb-2 text-muted">quantity - <%= cart.products[i].itemquantity %> kg</h6>
@@ -73,5 +65,40 @@
 
   	<% } %>
   </div>
+   </div>
+ </div>
+  
+  
+       <script>
+                            $(document).ready(function(){
+                            $(".itembidding").click(function(){ // Click to only happen on announce links
+
+                        
+                                 });
+                                   });
+                          </script>
+
+
+      <div id="cartcheckModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              
+                 <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="myModalLabel"> Payment Method</h4>
+                </div> 
+                <form action="/gateway" method="get">
+                  <div class="modal-body">
+                  WE ONLY PROVIDE COD..
+                     <input type="text" name="cartid" hidden="hidden" value=<%=user.cartid%>>
+                  </div>
+                  <div class="modal-footer">
+                    
+                    <input type="submit" class="btn btn-primary" value="CHECKOUT">
+                  </div>  
+                </form>
+            </div>    
+      </div>
+    </div>
 
 </body>

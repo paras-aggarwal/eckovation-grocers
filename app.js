@@ -2,12 +2,10 @@ const express= require('express')
 const app=express()
 var bodyParser= require('body-parser')
 var cookieParser = require('cookie-parser') 
-// var exphbs = require('express-handlebars')
 var expressValidator = require('express-validator')
 var session=require('express-session')
 var passport=require('passport')
 var LocalStrategy=require('passport-local').Strategy
-var bcrypt=require('bcrypt')
 var ejs=require('ejs')
 var flash=require('flash')
 const SendOtp = require('sendotp');
@@ -17,29 +15,22 @@ app.use(bodyParser.json())
 app.use(cookieParser())
 app.set('view engine','ejs')
 app.use(express.static(__dirname + '/public'));
-app.set('port', 8080);
-app.listen(app.get('port'));
 var mongoose=require('mongoose');
 var bcrypt=require('bcryptjs');
 
 
-  mongoose.connect('mongodb://tushar8:bitspilani@ds251849.mlab.com:51849/grocersusers',function(err,database)
-  {
+  mongoose.connect('mongodb://paras:paras@ds211029.mlab.com:11029/paras_db',function(err,database){
     if(err)
       return console.log(err);
-         return console.log("connected to mongo");
+         return console.log("Connected to MLAB Cloud Database...");
   });
 db1=mongoose.connection;
 module.exports.db= db1;
 
 //routes
-
-//var routes=require('./routes/index');
 var users=require('./routes/users');
 var item=require('./routes/item');
 var cart=require('./routes/cart');
-var gateway=require('./routes/gateway');
-
 app.use(function(req,res,next){
   res.locals.user = req.user || null;
   next();  
@@ -86,12 +77,13 @@ app.use(function(req,res,next){
   next();  
 });
 
-//app.use('/',routes);
+
+app.get('/gateway',function(req,res){
+ res.render('gateway.ejs');
+});
 app.use('/users',users);
 app.use('/item',item);
 app.use('/cart',cart);
-
-app.use('/gateway',gateway);
 
 app.get('/',function(req,res){
 	var cursor = db1.collection('items').find().toArray(function(err1,result1){
@@ -101,5 +93,9 @@ app.get('/',function(req,res){
         }
 
 )
+});
+
+app.listen(3000 || process.env.PORT, function() {
+  console.log('Server started!');
 });
 module.exports = app;

@@ -1,10 +1,14 @@
 
 <!DOCTYPE html>
-<html>
+<html ng-app="myapp">
 <head>
-  <title>Login || Screen</title>
+  <title>Login | Grocers</title>
+  <% include ./header %>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Metamorphous" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
 <style>
 .footer {
    position: fixed;
@@ -18,52 +22,37 @@
 </style>
 </head>
 
-<body style="background-color: #f3f3f3">
+<body style="background-color: #f3f3f3" ng-controller="myctrl">
 
   
-   <nav  class="navbar fixed-top navbar-expand-lg navbar-dark">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Bid-4-U</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">GROCERS</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+            <% if(!user)
+            {%>
+            <li class="nav-item"><a href="/users/phone"><button class="btn btn-outline-secondary">+ Add Item</button></a></li>
+            <li class="nav-item"><a href="/users/register"><button class="btn btn-outline-secondary"><span class="glyphicon glyphicon-user"></span> Sign Up</button></a></li>
+            <li class="nav-item"><a href="/users/login"><button class="btn btn-outline-secondary"><span class="glyphicon glyphicon-log-in"></span> Login</button></a></li>
+              
+              <%} %>
+              <% if(user)
+              {%>
+              <li class="nav-item"><a href="/item/additem"><button class="btn btn-outline-secondary">+ Add Item</button></a></li>
+              <li class="nav-item"><a href="/users/logout"><button class="btn btn-outline-secondary"><span class="glyphicon glyphicon-log-out"></span> Logout</button></a></li>
+              <li><form class="form-inline" action="cart/showcart" method="post">
+                <input type="text" name="user" hidden="hidden" value=<%=user.cartid%>>
+                <button class="btn btn-outline-secondary" type="submit" name="cart"><span class="glyphicon glyphicon-shopping-cart"></span> cart</button>
+              </form></li>
+                <%} %>
+            </li>
+          </ul>
         </div>
-    
-    <div id="navbar" class="navbar-collapse collapse" id="navbarSupportedContent">
-    <!-- <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent"> -->
-    
-    <ul class="nav navbar-nav navbar-right ">
-        <li class="nav-item ">
-          <a class="nav-link" href="/">Home </a>
-        </li>
-         <% if(user)
-                    {%>
-                    <li class="nav-item"><a class="nav-link" href="/biddetail/?use=<%= user.name %>?use=<%= user.email %>">ADD BID</a></li>
-                      <%} %>
-                     <% if(!user)
-                    {%>
-                    <li class="nav-item"><a class="nav-link" href="/users/register">ADD BID</a></li>
-                      <%} %>
-                      
-
-                       <% if(!user)
-                   {%>
-                    <li class="nav-item active"><a class="nav-link" href="/users/login">LOGIN <span class="sr-only">(current)</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="/users/register">REGISTER</a></li>
-                      <%} %>
-                    <% if(user)
-                    {%>
-                     <li class="nav-item"><a class="nav-link" href="/users/logout">LOGOUT</a></li>
-                       <%} %>
-          
-               </ul>
-         </div>
-      </div>
-       </nav>
+      </nav>
           <% if (error)
                       {%>
                      <% for (var i=0;i<error.length;i++)
@@ -88,16 +77,16 @@
                         <form class="form-horizontal" role="form" id="signupform" action="/users/login" accept-charset="UTF-8" method="post">       
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user text-primary"></i></span>
-                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="username" placeholder="username or email">                                        
+                                        <input type="text" ng-model="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="username" placeholder="username or email">                                        
                                     </div> 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock text-primary"></i></span>
-                                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="password" autocomplete="off"  name="password">
+                                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="password" ng-model="password" autocomplete="off"  name="password">
                                     </div>
                             <div class="input-group">
                                      <div class="form-check">
                                       <label class="form-check-label">
-                                        <input type="checkbox" class="form-check-input">
+                                        <input type="checkbox" class="form-check-input" ng-model="checkbox">
                                         Remember me
                                       </label>
                                     </div>
@@ -125,79 +114,7 @@
         </div>    
     </div>
 <div class="row"> <div class="col-md-12"></div></div>
-    <!-- Uppal's Login -->
-  <!-- <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
-        <br/><br/><br/><br/>
-              <div id="flashalert" class="message">You need to sign in or sign up before continuing.</div>
-          <br/>
-         
-        <div class="row mx-auto">
-          <div class="col-lg-12 ">
-            <nav aria-label="breadcrumb" role="navigation">
-              <ol class="breadcrumb bg-dark text-white mx-auto">
-                <li class="breadcrumb-item mx-auto  text-white active" aria-current="page">Login</li>
-              </ol>
-            </nav>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="col-lg-12">
-
-        <div class="card w-100">
-          <div class="card-body w-100">
-            <form class="new_user" id="signupform" action="/users/login" accept-charset="UTF-8" method="post">
-             
-
-              <div class="form-group">
-                <label for="exampleInputEmail1">Username</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Username" name="username">
-                
-              </div>
-              <div class="form-group"> 
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" autocomplete="off"  name="password" >
-              </div>
-              <div class="form-check">
-                <label class="form-check-label">
-                  <input type="checkbox" class="form-check-input">
-                  Remember me
-                </label>
-              </div>
-             <center> <button type="submit" class="btn btn-primary" name="commit" id="submit_button">Login</button></center>
-            </form>
-            <br/>
-            
-  <a href="/users/register">Sign up</a><br />
-
-  <a href="/users/login">Forgot your password?</a><br />
-
-
-
-          </div></div></div>
-        </div>
-      </div>
-   -->
  </div>
-      <footer class="footer" >
-          <center><p style="color:#f6f6f6; padding-top: 10px;font-size: 15px;" >© 2018 BID-4-U.com   All Rights Reserved.</p>
-           
-
-            <div style="margin-top:-10px;"><a href="https://www.facebook.com/tushar.row" target="_blank">
-              <i class="fa fa-facebook-official icon-large" aria-hidden="true" style="color:white;margin-left: 10px;">
-                
-              </i>
-            </a>
-            <i class="fa fa-twitter-square" aria-hidden="true"  style="color:white;margin-left: 10px;">
-              
-            </i>
-            </div>
-          </center>
-      <br>
-      </footer>
       <script src="https://use.fontawesome.com/bc4369196c.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 </body>

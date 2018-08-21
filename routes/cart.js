@@ -26,7 +26,7 @@ router.post('/additem/',function(req,res){
 			throw err;
 		else
         {
-		console.log(doc._id);
+		// console.log(doc._id);
        var it={itemquantity:num, itemid:doc._id};
        Cart.findByIdAndUpdate(id, {$push: {products: it}, $inc: {
 		noofitem: num,
@@ -76,6 +76,32 @@ router.post('/showcart',function(req,res){
 	});
 	
 });
+
+
+router.post('/checkout',function(req,res){
+	var id = req.body.cartid;
+	console.log("checkout id= "+id);
+	
+     Cart.findByIdAndUpdate(id, { $set: { products: [] }, 
+		noofitem: 0,
+		price:0 }
+		,function(err,doc){
+	 	if (err) {
+	 		console.log(err);
+	 	}
+	 	else{
+	 		console.log('id: '+doc._id+' no: '+doc.noofitem+' price: '+doc.price+' item: ');
+	 	}
+	 }
+);
+
+
+  res.redirect('/cart/showcart');
+});
+	
+
+
+
 
 module.exports= router;
 

@@ -1,10 +1,19 @@
 
 <!DOCTYPE html>
-<html>
+<html ng-app="myapp">
 <head>
-  <title>BID-4-U || Now Do Bidding Easily</title>
-
+  <title>Add Item | Grocers</title>
+  <% include ./header %> 
+  <link href="https://fonts.googleapis.com/css?family=Metamorphous" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Metamorphous" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
       <link rel="stylesheet" href="/style.css">
 
 
@@ -25,16 +34,45 @@
 
 </head>
 
-<body style="background-color: #f3f3f3">
+<body ng-controller="myctrl"> 
 
- 
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">GROCERS</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+            <% if(!user)
+            {%>
+            <li class="nav-item"><a href="/users/phone"><button class="btn btn-outline-secondary">+ Add Item</button></a></li>
+            <li class="nav-item"><a href="/users/register"><button class="btn btn-outline-secondary"><span class="glyphicon glyphicon-user"></span> Sign Up</button></a></li>
+            <li class="nav-item"><a href="/users/login"><button class="btn btn-outline-secondary"><span class="glyphicon glyphicon-log-in"></span> Login</button></a></li>
+              
+              <%} %>
+              <% if(user)
+              {%>
+              <li class="nav-item"><a href="/item/additem"><button class="btn btn-outline-secondary">+ Add Item</button></a></li>
+              <li class="nav-item"><a href="/users/logout"><button class="btn btn-outline-secondary"><span class="glyphicon glyphicon-log-out"></span> Logout</button></a></li>
+              <li><form class="form-inline" action="/cart/showcart" method="post">
+                <input type="text" name="user" hidden="hidden" value=<%=user.cartid%>>
+                <button class="btn btn-outline-secondary" type="submit" name="cart"><span class="glyphicon glyphicon-shopping-cart"></span> cart</button>
+              </form></li>
+                <%} %>
+            </li>
+          </ul>
+        </div>
+      </nav>
   
+      <div class="row">
+        <div class="col-md-6 mx-auto">
             <form action="/item/additem" enctype="multipart/form-data" accept-charset="UTF-8" method="POST">
               <div class="form-group">
               <label>Item name</label>
               <div class="form-row">    
                 <div class="col">
-                  <input type="text" class="form-control" placeholder="Item Name" name="itemname" autofocus="autofocus" required="true" >
+                  <input type="text" class="form-control" placeholder="Item Name" name="name" autofocus="autofocus" required="true" >
                 </div>
               </div>
               <br/>
@@ -59,9 +97,14 @@
                   <input type="hidden"  name="photo" >
                    
                  
-             <center><input type="submit"></center>
+             <center><button type="submit" class="btn btn-primary">Submit</button></center>
             </form>
-  
+        </div>
+      </div>
+            
+      <nav class="navbar fixed-bottom navbar-light bg-light">
+          &copy; 2018, Paras Aggarwal 
+        </nav>
 
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="https://use.fontawesome.com/bc4369196c.js"></script>
